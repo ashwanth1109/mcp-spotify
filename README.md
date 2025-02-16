@@ -15,6 +15,9 @@ A FastMCP tool for Spotify.
 - Go to Cursor Settings > Features > MCP Servers > + Add new MCP server
 - Name: Spotify, Type: command, Command: uv --directory <path-to-repository/mcp-spotify> run main.py
 
+You should see the tool installed now.
+![installed_mcp](./assets/installed_mcp.png)
+
 ## Trying it out
 
 - Open `Composer` in "agent" mode and voila, you can have cursor control your Spotify player. (make sure you have spotify open on an active device)
@@ -26,7 +29,7 @@ Below is an example conversation showcasing how you can interact with the Spotif
 1. **User:** "Show me my playlists."  
    **Response:** "Here are your playlists: Chill Vibes, Workout Mix, Top Hits."
 
-2. **User:** "Play my 'Chill Vibes' playlist." _(Coming soon)_
+2. **User:** "Play my 'Chill Vibes' playlist."
 
 3. **User:** "Pause song."  
    **Response:** "Playback paused."
@@ -38,7 +41,7 @@ Below is an example conversation showcasing how you can interact with the Spotif
    **Response:** "You're listening to 'Faded' by Alan Walker."
 
 6. **User:** "Tell me about this artist and show me some popular tracks."  
-   **Response:** "Artist Info: Alan Walker." _(Popular tracks feature coming soon)_
+   **Response:** "Artist Info: Alan Walker."
 
 7. **User:** "Show me my top artists from the last 6 months."  
    **Response:** "Here are your most played artists..."
@@ -55,19 +58,19 @@ Below is an example conversation showcasing how you can interact with the Spotif
 11. **User:** "Add 'Paradise' to my queue."  
     **Response:** "Added 'Paradise' by Coldplay to your queue."
 
-12. **User:** "Move 'Paradise' up in the queue." _(Coming soon)_
+12. **User:** "Move 'Paradise' up in the queue."
 
-13. **User:** "Set it on repeat." _(Coming soon)_
+13. **User:** "Set it on repeat."
 
 14. **User:** "I like this song. Recommend some similar tracks."  
     **Response:** "Here are some recommendations based on this track..."
 
-15. **User:** "Add this track to my 'Chill Vibes' playlist." _(Coming soon)_
+15. **User:** "Add this track to my 'Chill Vibes' playlist."
 
 Additional Available Features:
 - Seek to specific position in track
 - View detailed playback state
 - Skip multiple tracks at once
 
-Features marked with _(Coming soon)_ are planned additions that will leverage the Spotify Web API.
+If you want more features to be supported, feel free to raise an issue!
 
