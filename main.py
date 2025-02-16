@@ -152,6 +152,61 @@ async def get_current_track() -> str:
     return await client.get_current_track()
 
 
+@mcp.tool()
+async def start_playlist_playback(playlist_id: str, device_id: str = None) -> str:
+    """
+    Start playback of a specific playlist
+    Args:
+        playlist_id: Spotify playlist ID
+        device_id: Optional device to play on
+    """
+    return await client.start_context_playback(
+        f"spotify:playlist:{playlist_id}", device_id
+    )
+
+
+@mcp.tool()
+async def get_artist_top_tracks(artist_id: str) -> str:
+    """
+    Get top tracks for an artist
+    Args:
+        artist_id: Spotify artist ID
+    """
+    return await client.get_artist_top_tracks(artist_id)
+
+
+@mcp.tool()
+async def set_repeat_mode(state: str) -> str:
+    """
+    Set repeat mode for playback
+    Args:
+        state: One of 'track', 'context', or 'off'
+    """
+    return await client.set_repeat(state)
+
+
+@mcp.tool()
+async def add_to_playlist(playlist_id: str, track_ids: list[str]) -> str:
+    """
+    Add tracks to a playlist
+    Args:
+        playlist_id: Spotify playlist ID
+        track_ids: List of track IDs to add
+    """
+    return await client.add_to_playlist(playlist_id, track_ids)
+
+
+@mcp.tool()
+async def reorder_queue(range_start: int, insert_before: int) -> str:
+    """
+    Reorder tracks in queue by moving a track to a different position
+    Args:
+        range_start: Position of track to move
+        insert_before: Position to insert the track
+    """
+    return await client.reorder_queue(range_start, insert_before)
+
+
 def main() -> None:
     print("MCP Spotify Running...")
     mcp.run(transport="stdio")

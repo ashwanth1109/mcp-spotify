@@ -189,9 +189,7 @@ class SpotifyClient:
             return f"Error seeking: {str(e)}"
 
     async def start_playback_track(
-        self, 
-        track_uri: str, 
-        device_id: Optional[str] = None
+        self, track_uri: str, device_id: Optional[str] = None
     ) -> str:
         """
         Start playback of a specific track.
@@ -199,26 +197,23 @@ class SpotifyClient:
         - device_id: Optional device to play on
         """
         try:
-            self.sp.start_playback(
-                device_id=device_id,
-                uris=[track_uri]
-            )
+            self.sp.start_playback(device_id=device_id, uris=[track_uri])
             return "Started playing track successfully"
         except Exception as e:
             return f"Error starting track playback: {str(e)}"
 
-    async def get_top_artists(self, limit: int = 20, time_range: str = "medium_term") -> dict:
+    async def get_top_artists(
+        self, limit: int = 20, time_range: str = "medium_term"
+    ) -> dict:
         """
         Get the current user's top artists.
         - limit: Number of artists to return (default 20, max 50)
-        - time_range: 'short_term' (last 4 weeks), 'medium_term' (last 6 months), 
+        - time_range: 'short_term' (last 4 weeks), 'medium_term' (last 6 months),
                      or 'long_term' (all time) (default: medium_term)
         """
         try:
             results = self.sp.current_user_top_artists(
-                limit=limit,
-                offset=0,
-                time_range=time_range
+                limit=limit, offset=0, time_range=time_range
             )
             return results
         except Exception as e:
@@ -271,4 +266,71 @@ class SpotifyClient:
         except Exception as e:
             return f"Error getting current track: {str(e)}"
 
-    
+    async def start_context_playback(
+        self, context_uri: str, device_id: Optional[str] = None
+    ) -> str:
+        """
+        Start playback of a context (playlist, album, artist)
+        - context_uri: Spotify URI (e.g. 'spotify:playlist:37i9dQ...')
+        - device_id: Optional device to play on
+        """
+        try:
+            self.sp.start_playback(device_id=device_id, context_uri=context_uri)
+            return "Started playing context successfully"
+        except Exception as e:
+            return f"Error starting context playback: {str(e)}"
+
+    async def get_artist_top_tracks(self, artist_id: str) -> dict:
+        """
+        Get an artist's top tracks
+        - artist_id: Spotify artist ID
+        """
+        try:
+            # Note: market parameter defaults to user's country
+            results = self.sp.artist_top_tracks(artist_id)
+            return results
+        except Exception as e:
+            return f"Error getting artist top tracks: {str(e)}"
+
+    async def set_repeat(self, state: str) -> str:
+        """
+        Set repeat mode for playback
+        - state: 'track', 'context' or 'off'
+        """
+        try:
+            self.sp.repeat(state)
+            return f"Repeat mode set to {state}"
+        except Exception as e:
+            return f"Error setting repeat mode: {str(e)}"
+
+    async def add_to_playlist(self, playlist_id: str, track_ids: list[str]) -> str:
+        """
+        Add tracks to a playlist
+        - playlist_id: Spotify playlist ID
+        - track_ids: List of track IDs to add
+        """
+        try:
+            # Convert track IDs to full URIs
+            track_uris = [f"spotify:track:{track_id}" for track_id in track_ids]
+            self.sp.playlist_add_items(playlist_id, track_uris)
+            return "Tracks added to playlist successfully"
+        except Exception as e:
+            return f"Error adding tracks to playlist: {str(e)}"
+
+    async def reorder_queue(self, range_start: int, insert_before: int) -> str:
+        """
+        Reorder tracks in queue by moving a track to a different position
+        - range_start: Position of track to move (0-based)
+        - insert_before: Position to insert the track (0-based)
+        """
+        try:
+            # Note: Spotify's queue reordering is done through a special endpoint
+            # that requires both positions to be 0-based
+            self.sp.queue_reorder(
+                range_start=range_start,
+                insert_before=insert_before,
+                range_length=1,  # Move one track at a time
+            )
+            return "Queue reordered successfully"
+        except Exception as e:
+            return f"Error reordering queue: {str(e)}"
