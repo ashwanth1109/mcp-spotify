@@ -2,6 +2,10 @@
 
 A FastMCP tool for Spotify.
 
+## Demo
+
+![Demo](./assets/Demo-v1.mp4)
+
 ## Pre-requisites
 
 - [uv](https://docs.astral.sh/uv/getting-started/installation/)
