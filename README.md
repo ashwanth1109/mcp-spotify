@@ -4,7 +4,7 @@ A FastMCP tool for Spotify.
 
 ## Demo
 
-![Demo](./assets/Demo-v1.mp4)
+Link: https://drive.google.com/file/d/1jGGQBzeXSKSJijeUwFZLdvrKPmPuogGd/
 
 ## Pre-requisites
 
