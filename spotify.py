@@ -224,4 +224,51 @@ class SpotifyClient:
         except Exception as e:
             return f"Error getting top artists: {str(e)}"
 
+    async def get_queue(self) -> dict:
+        """
+        Get the current user's queue.
+        Returns information about the queue including currently playing track and next tracks.
+        """
+        try:
+            results = self.sp.queue()
+            return results
+        except Exception as e:
+            return f"Error getting queue: {str(e)}"
+
+    async def add_to_queue(self, track_id: str) -> str:
+        """
+        Add a track to the user's queue.
+        - track_id: Spotify track ID to add
+        """
+        try:
+            self.sp.add_to_queue(uri=f"spotify:track:{track_id}")
+            return "Track added to queue successfully"
+        except Exception as e:
+            return f"Error adding track to queue: {str(e)}"
+
+    async def skip_track(self, n: int = 1) -> str:
+        """
+        Skip multiple tracks in the queue.
+        - n: Number of tracks to skip (default: 1)
+        """
+        try:
+            for _ in range(n):
+                self.sp.next_track()
+            return f"Skipped {n} tracks successfully"
+        except Exception as e:
+            return f"Error skipping tracks: {str(e)}"
+
+    async def get_current_track(self) -> dict:
+        """
+        Get detailed information about the currently playing track.
+        Returns None if no track is currently playing.
+        """
+        try:
+            result = self.sp.current_user_playing_track()
+            if not result:
+                return "No track currently playing"
+            return result
+        except Exception as e:
+            return f"Error getting current track: {str(e)}"
+
     

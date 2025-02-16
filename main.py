@@ -120,6 +120,38 @@ async def get_top_artists(limit: int = 20, time_range: str = "medium_term") -> s
     return await client.get_top_artists(limit, time_range)
 
 
+@mcp.tool()
+async def get_queue() -> str:
+    """Get the current queue of tracks"""
+    return await client.get_queue()
+
+
+@mcp.tool()
+async def add_to_queue(track_id: str) -> str:
+    """
+    Add a track to the queue
+    Args:
+        track_id: Spotify track ID to add
+    """
+    return await client.add_to_queue(track_id)
+
+
+@mcp.tool()
+async def skip_tracks(num_skips: int = 1) -> str:
+    """
+    Skip multiple tracks at once
+    Args:
+        num_skips: Number of tracks to skip (default: 1)
+    """
+    return await client.skip_track(num_skips)
+
+
+@mcp.tool()
+async def get_current_track() -> str:
+    """Get information about the currently playing track"""
+    return await client.get_current_track()
+
+
 def main() -> None:
     print("MCP Spotify Running...")
     mcp.run(transport="stdio")
