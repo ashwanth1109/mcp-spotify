@@ -14,11 +14,11 @@ async def get_my_playlists() -> str:
 
 
 @mcp.tool()
-async def start_playback(device_id: str = None) -> str:
+async def start_playback() -> str:
     """
-    FastMCP tool to start playback on spotify if you have an active device.
+    FastMCP tool to resume playback on the currently active Spotify device.
     """
-    return await client.start_playback(device_id if device_id else "")
+    return await client.start_playback()
 
 
 @mcp.tool()

@@ -66,12 +66,12 @@ class SpotifyClient:
         except Exception as e:
             return f"Error fetching playlists: {str(e)}"
 
-    async def start_playback(self, device_id: Optional[str] = None) -> str:
+    async def start_playback(self) -> str:
         """
-        Start or resume playback on the specified device.
+        Resume playback on the currently active device.
         """
         try:
-            self.sp.start_playback(device_id=device_id)
+            self.sp.start_playback()
             return "Playback started successfully"
         except Exception as e:
             return f"Error starting playback: {str(e)}"
